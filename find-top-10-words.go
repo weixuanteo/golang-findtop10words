@@ -24,9 +24,10 @@ func submit(w http.ResponseWriter, r *http.Request){
         wordDict := make(map[string]int)
 
         unparsedText := r.Form["textbody"]
-        newText := strings.NewReplacer(",", "", ".", "", ";", "")
+        newText := strings.NewReplacer(",", "", ".", "", ";", "") //remove punctuation
         unparsedText[0] = newText.Replace(unparsedText[0])
-        words := strings.Fields(strings.ToLower(unparsedText[0]))
+        words := strings.Fields(strings.ToLower(unparsedText[0])) //convert to lowercase, writing to words
+        //parsing each word, adding each word to a map and count them
         for i, word := range words {
               fmt.Println(i, " -> ", word)
               wordDict[word] = count
